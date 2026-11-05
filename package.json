@@ -1,0 +1,11 @@
+{
+  "name": "luminiscidio",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build": "node build.mjs"
+  },
+  "devDependencies": {
+    "terser": "^5.36.0"
+  }
+}
