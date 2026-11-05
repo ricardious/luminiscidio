@@ -4,14 +4,14 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#01030a">
-<title>Abisal: El Faro de Carne</title>
+<title>Luminiscidio: El Faro de Carne</title>
 <link rel="icon" href="data:,">
 <style>
 *{box-sizing:border-box}html,body{height:100%;margin:0;background:radial-gradient(ellipse at 50% 30%,#06162a 0%,#01030a 60%,#000 100%)}body{display:grid;place-items:center;overflow:hidden}canvas{width:100vw;height:100vh;object-fit:contain;image-rendering:pixelated;image-rendering:crisp-edges;background:#01030a;cursor:crosshair;touch-action:none}canvas:focus{outline:none}
 </style>
 </head>
 <body>
-<canvas id="game" width="480" height="270" tabindex="0" aria-label="Abisal: El Faro de Carne. Usa WASD o flechas para nadar y mantén espacio para encender la luz."></canvas>
+<canvas id="game" width="480" height="270" tabindex="0" aria-label="Luminiscidio: El Faro de Carne. Usa WASD o flechas para nadar y mantén espacio para encender la luz."></canvas>
 <script>
 (()=>{'use strict';
 let W=480;const H=270,TAU=Math.PI*2,C=document.getElementById('game'),X=C.getContext('2d',{alpha:false});
@@ -101,7 +101,7 @@ function hud(){let score=pts+(run|0)*5;text('HAMBRE',10,9,1,'#6fa7a0',0,1);X.fil
 function panel(y,h){X.fillStyle='rgba(0,2,8,.55)';X.fillRect(0,0,W,H);let g=X.createLinearGradient(0,0,W,0);g.addColorStop(0,'rgba(1,5,12,0)');g.addColorStop(.25,'rgba(1,5,12,.9)');g.addColorStop(.75,'rgba(1,5,12,.9)');g.addColorStop(1,'rgba(1,5,12,0)');X.fillStyle=g;X.fillRect(0,y,W,h);g=X.createLinearGradient(0,0,W,0);g.addColorStop(0,'rgba(79,224,189,0)');g.addColorStop(.5,'rgba(79,224,189,.35)');g.addColorStop(1,'rgba(79,224,189,0)');X.fillStyle=g;X.fillRect(0,y,W,1);X.fillRect(0,y+h-1,W,1)}
 function title(){ocean(X,0);renderFish(clock);let LL=lure(clock),fx_=W/2+LL.x*2,fy=151+LL.y*2;glow(X,fx_,fy,90,'rgba(255,200,120,.9)','rgba(30,140,140,.35)',.22);pic(X,FC,W/2,151,0,2);glow(X,fx_,fy,14,'#fff0b8','rgba(160,110,40,.5)',.7+Math.sin(clock*3)*.2);
  for(let s of snow)if(s.g>0)glow(X,sx(s),s.y,4,'#7ffbe6','rgba(30,160,150,.4)',s.g*.8);layer(X,FG);X.drawImage(VG,0,0);
- text('ABISAL',W/2,43,5,'#d3f2e4',1,1);text('EL FARO DE CARNE',W/2,79,2,'#d23c55',1,1);text('COME LO DORADO. TEME LA CARNE.',W/2,182,1,'#8fc3b6',1,1);text('WASD / FLECHAS  NADAR',W/2,198,1,'#4f8088',1);text('MANTEN ESPACIO  ENCENDER LA LUZ',W/2,209,1,'#4f8088',1);if((clock*2|0)%2)text('PULSA ESPACIO PARA SUMERGIRTE',W/2,232,1,'#ffe7a8',1,1);if(best)text('RECORD '+best,W/2,251,1,'#5e8e90',1,1)}
+ text('LUMINISCIDIO',W/2,43,5,'#d3f2e4',1,1);text('EL FARO DE CARNE',W/2,79,2,'#d23c55',1,1);text('COME LO DORADO. TEME LA CARNE.',W/2,182,1,'#8fc3b6',1,1);text('WASD / FLECHAS  NADAR',W/2,198,1,'#4f8088',1);text('MANTEN ESPACIO  ENCENDER LA LUZ',W/2,209,1,'#4f8088',1);if((clock*2|0)%2)text('PULSA ESPACIO PARA SUMERGIRTE',W/2,232,1,'#ffe7a8',1,1);if(best)text('RECORD '+best,W/2,251,1,'#5e8e90',1,1)}
 function dead(){world();hud();panel(72,150);let h=death==='HAMBRE';text(h?'LA LUZ SE APAGO':'DEVORADO',W/2,88,3,h?'#ffcf7a':'#ff4a5e',1,1);text(h?'EL ABISAL NECESITABA COMER':'LA CARNE TE ENCONTRO',W/2,115,1,'#86aaa2',1);let score=pts+(run|0)*5;text('PUNTOS '+score,W/2,139,2,'#eef6d2',1,1);text('CAMARONES '+eaten+'   TIEMPO '+(run|0)+'S',W/2,158,1,'#6f9993',1);text('RECORD '+best+'   PROF '+(depth+1)*1000+'M',W/2,172,1,'#6f9993',1);text('ESPACIO / R  VOLVER A NADAR',W/2,207,1,'#ffe7a8',1)}
 function draw(){X.setTransform(1,0,0,1,0,0);X.globalAlpha=1;if(state==='title')title();else if(state==='dead')dead();else{world();hud();if(state==='pause'){panel(101,59);text('PAUSA',W/2,113,3,'#d3f2e4',1,1);text('P PARA CONTINUAR',W/2,143,1,'#6f9993',1)}}}
 function frame(ms){requestAnimationFrame(frame);let dt=Math.min(.033,(ms-last)/1000||0);last=ms;clock=ms/1000;if(state==='play')update(dt);if(state!=='pause'){drift(dt);let tx=state==='title'?W/2+Math.sin(clock*.25)*90:p.x,ty=state==='title'?H/2:p.y,k=Math.min(1,dt*2.5);camx+=(W/2-tx-camx)*k;camy+=(H/2-ty-camy)*k}draw()}
